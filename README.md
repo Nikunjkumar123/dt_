@@ -1,9 +1,11 @@
 1. Base URL -----------------------------------------------------------------------------------------------------------------------------------------------------
      -All API endpoints related to nudges will follow this base URL:
-       http://localhost:3000
 
-2. Data Model for Nudge Object ---------------------------------------------------------------------------------------------------------------------------------
-     {
+    http://localhost:3000
+
+3. Data Model for Nudge Object ---------------------------------------------------------------------------------------------------------------------------------
+
+    {
       "_id": "string",  // Unique identifier for the Nudge
       "eventId": "string",  // ID of the associated event
       "title": "string",  // Title of the nudge
@@ -16,15 +18,15 @@
       "updatedAt": "string"  // Date the nudge was last updated
     }
 
-3. API Endpoints -------------------------------------------------------------------------------------------------------------------------------------------------
+4. API Endpoints -------------------------------------------------------------------------------------------------------------------------------------------------
 
-       Below is the structure for the CRUD operations related to the Nudge entity.
+      Below is the structure for the CRUD operations related to the Nudge entity.
       Create Nudge
       Endpoint: /api/v3/nudges
       Method: POST
       Description: Creates a new nudge for a specific event with a simple payload (given in 2).
     
-      In response -----------------------------------------------------------------------------------
+      Response ---------------------------
       {
       "message": "Nudge created successfully",
       "nudge": {
@@ -37,8 +39,8 @@
         "icon": "string",
         "invitation": "string",
         "createdAt": "string",
-        "updatedAt": "string"
-      }
+        "updatedAt": "string",
+      },
     }
 
 
@@ -76,8 +78,7 @@
       Endpoint: /api/v3/nudges/:id
       Method: GET
       Description: Fetches a specific nudge by its ID.
-      Response:
-      json -----------------------------------------------
+      Response: -----------------------------------------------
       {
         "_id": "string",
         "eventId": "string",
@@ -90,9 +91,10 @@
         "createdAt": "string",
         "updatedAt": "string"
       }
-7. Update Nudge --------------------------------------------------------------------------------------------------------------------------------------------------
+   
+6. Update Nudge --------------------------------------------------------------------------------------------------------------------------------------------------
 
-       Endpoint: /api/v3/nudges/:id
+      Endpoint: /api/v3/nudges/:id
       Method: PUT
       Description: Updates an existing nudge by its ID.
       Request Payload: -----------------------------------------------
@@ -104,6 +106,7 @@
         "icon": "string",  // Updated icon
         "invitation": "string"  // Updated short invitation message
       }
+   
       Response: --------------------------------------------------------
       {
         "message": "Nudge updated successfully",
@@ -126,7 +129,7 @@
     Endpoint: /api/v3/nudges/:id
     Method: DELETE
     Description: Deletes a specific nudge by its ID.
-    Response: -----------------------------------------------
+    Response: ---------------------------------------
     {
       "message": "Nudge deleted successfully"
     }

@@ -23,31 +23,35 @@
 
       Below is the structure for the CRUD operations related to the Nudge entity.
       Create Nudge
-      Endpoint: /api/v3/nudges
+      Endpoint: /api/v3/app/events
       Method: POST
       Description: Creates a new nudge for a specific event with a simple payload (given in 2).
-    
-      Response ---------------------------
+      Request------------------------------
       {
-      "message": "Nudge created successfully",
-      "nudge": {
-        "_id": "string",
-        "eventId": "string",
-        "title": "string",
-        "image": "string",
-        "time": "string",
-        "description": "string",
-        "icon": "string",
-        "invitation": "string",
-        "createdAt": "string",
-        "updatedAt": "string",
-      },
-    }
+        "name": "Tech Idea 2024",
+        "tagline": "Innovating the AI",
+        "schedule": "2024-05-15T09:00:00Z",
+        "description": "A conference for tech enthusiasts.",
+        "files": { "image": "path/to/image.jpg" },
+        "moderator": "John Smilga",
+        "category": "Technology",
+        "sub_category": "Generative AI",
+        "rigor_rank": 5,
+        "attendees": ["joe", "ram"]
+        }
+
+
+      Response ---------------------------
+        {
+        "msg": "event created",
+        "eventId": "673cdfc95ae769bbf78d8e72"
+        }
+
 
 
 4.Get All Nudges --------------------------------------------------------------------------------------------------------------------------------------------------
     
-    Endpoint: /api/v3/nudges
+    Endpoint: /api/v3/app/events/latest?limit=2&page=1&type=latest
     Method: GET
     Description: Fetches all nudges created by the user or associated with the user's events.
     Query Parameters:
@@ -56,82 +60,76 @@
     
     Response: ----------------------------------------
     {
-      "nudges": [
-        {
-          "_id": "string",
-          "eventId": "string",
-          "title": "string",
-          "image": "string",
-          "time": "string",
-          "description": "string",
-          "icon": "string",
-          "invitation": "string",
-          "createdAt": "string",
-          "updatedAt": "string"
-        },
-      
-      ]
-    }
+            "_id": "673cdf7a04c0cede33e8efcc",
+            "name": "Tech Idea 2024",
+            "tagline": "Innovating the AI",
+            "schedule": "2024-05-15T09:00:00Z",
+            "description": "A conference for tech enthusiasts.",
+            "files": {
+                "image": "path/to/image.jpg"
+            },
+            "moderator": "John Smilga",
+            "category": "Technology",
+            "sub_category": "Generative AI",
+            "rigor_rank": 5,
+            "attendees": [
+                "joe",
+                "ram"
+            ]
+        }
 
 
 5. Get Nudge by ID   --------------------------------------------------------------------------------------------------------------------------------------------
 
-      Endpoint: /api/v3/nudges/:id
+      Endpoint: /api/v3/app/events/:id
       Method: GET
       Description: Fetches a specific nudge by its ID.
       Response: -----------------------------------------------
-      {
-        "_id": "string",
-        "eventId": "string",
-        "title": "string",
-        "image": "string",
-        "time": "string",
-        "description": "string",
-        "icon": "string",
-        "invitation": "string",
-        "createdAt": "string",
-        "updatedAt": "string"
-      }
+    {
+        "_id": "673cdfc95ae769bbf78d8e72",
+        "name": "Tech Idea 2024",
+        "tagline": "Innovating the AI",
+        "schedule": "2024-05-15T09:00:00Z",
+        "description": "A conference for tech enthusiasts.",
+        "files": {
+            "image": "path/to/image.jpg"
+        },
+        "moderator": "John Smilga",
+        "category": "Technology",
+        "sub_category": "Generative AI",
+        "rigor_rank": 5,
+        "attendees": [
+            "joe",
+            "ram"
+        ]
+    }
    
 6. Update Nudge --------------------------------------------------------------------------------------------------------------------------------------------------
 
-      Endpoint: /api/v3/nudges/:id
+      Endpoint: /api/v3/app/events/:id
       Method: PUT
       Description: Updates an existing nudge by its ID.
       Request Payload: -----------------------------------------------
-      {
-        "title": "string",  // New title for the nudge
-        "image": "string",  // URL for the new image
-        "time": "string",  // Updated time to send the nudge (ISO 8601 format)
-        "description": "string",  // Updated description
-        "icon": "string",  // Updated icon
-        "invitation": "string"  // Updated short invitation message
-      }
+        {
+        "name": "Tech Conference 2024 - Updated",
+        "schedule": "2024-06-20T09:00:00Z",
+        "description": "A revised conference for tech enthusiasts.",
+        "moderator": "Jane Doe",
+        "attendees": ["nikunj", "kunj","kk"]
+        }
    
       Response: --------------------------------------------------------
-      {
-        "message": "Nudge updated successfully",
-        "nudge": {
-          "_id": "string",
-          "eventId": "string",
-          "title": "string",
-          "image": "string",
-          "time": "string",
-          "description": "string",
-          "icon": "string",
-          "invitation": "string",
-          "createdAt": "string",
-          "updatedAt": "string"
+        {
+            "message": "Event updated successfully"
         }
-      }
 
 7.Delete Nudge ----------------------------------------------------------------------------------------------------------------------------------------------------
   
-    Endpoint: /api/v3/nudges/:id
+    Endpoint: /api/v3/app/events/:id
     Method: DELETE
     Description: Deletes a specific nudge by its ID.
     Response: ---------------------------------------
     {
-      "message": "Nudge deleted successfully"
+        "message": "Event deleted successfully"
     }
 

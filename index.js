@@ -13,7 +13,7 @@ app.post('/api/v3/app/events', async (req, res) => {
   try {
     const db = getDB();
     const result = await db.collection('events').insertOne(event);
-    res.status(201).json({ eventId: result.insertedId });
+    res.status(201).json({msg:'event created', eventId: result.insertedId });
   } catch (error) {
     res.status(500).json({ error: 'Failed to create event' });
   }
@@ -45,9 +45,9 @@ app.get('/api/v3/app/events/', async (req, res) => {
       const db = getDB();
       const events = await db.collection('events')
         .find({})
-        .sort({ schedule: -1 })  // Sort by schedule descending
-        .skip(pageSize * (pageNumber - 1))  // Skip based on page number
-        .limit(pageSize)  // Limit to pageSize
+        .sort({ schedule: -1 }) 
+        .skip(pageSize * (pageNumber - 1)) 
+        .limit(pageSize)  
         .toArray();
       
       res.status(200).json(events);
@@ -58,13 +58,13 @@ app.get('/api/v3/app/events/', async (req, res) => {
   });
 
   app.put('/api/v3/app/events/:id', async (req, res) => {
-    const eventId = req.params.id; // Get the event ID from the URL
-    const updatedEvent = req.body; // Get the updated event details from the request body
+    const eventId = req.params.id; 
+    const updatedEvent = req.body; 
     
     try {
-      const db = await getDB(); // Wait for the DB connection
+      const db = await getDB();
       const result = await db.collection('events')
-        .updateOne({ _id: new ObjectId(eventId) }, { $set: updatedEvent }); // Use ObjectId to convert the string to ObjectId
+        .updateOne({ _id: new ObjectId(eventId) }, { $set: updatedEvent });
       
       if (result.modifiedCount > 0) {
         res.status(200).json({ message: 'Event updated successfully' });
@@ -72,12 +72,12 @@ app.get('/api/v3/app/events/', async (req, res) => {
         res.status(404).json({ error: 'Event not found or no changes made' });
       }
     } catch (error) {
-      console.error('Error updating event:', error); // Log the error for debugging
-      res.status(500).json({ error: 'Failed to update event', details: error.message }); // Send error details
+      console.error('Error updating event:', error); 
+      res.status(500).json({ error: 'Failed to update event', details: error.message }); 
     }
   });
   app.delete('/api/v3/app/events/:id', async (req, res) => {
-    const eventId = req.params.id; // Get the event ID from the URL
+    const eventId = req.params.id;
     
     try {
       const db = await getDB(); // Wait for the DB connection
@@ -89,13 +89,13 @@ app.get('/api/v3/app/events/', async (req, res) => {
         res.status(404).json({ error: 'Event not found' });
       }
     } catch (error) {
-      console.error('Error deleting event:', error); // Log the error for debugging
-      res.status(500).json({ error: 'Failed to delete event', details: error.message }); // Send error details
+      console.error('Error deleting event:', error); 
+      res.status(500).json({ error: 'Failed to delete event', details: error.message }); 
     }
   });
   
 
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
